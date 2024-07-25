@@ -1,8 +1,16 @@
 'use client'
 
+import { handleLogin } from "@/src/actions/actions"
+
 export const LoginForm = () => {
+    const handleSubmit = async (event: {target: any, preventDefault: () => void}) => {
+        const formData = new FormData(event.target)
+        event.preventDefault()
+        await handleLogin(formData)
+    }
+
     return (
-        <form action="" className="w-1/2">
+        <form action="" className="w-1/2" onSubmit={handleSubmit}>
             <div className="mb-6">
                 <label 
                     htmlFor="email" 
@@ -41,7 +49,7 @@ export const LoginForm = () => {
             </div>
             <div className="mb-6">
                 <button 
-                    type="button" 
+                    type="submit" 
                     className="w-full px-3 py-4 text-mp-white bg-mp-green rounded-md focus:bg-mp-light-green 
                                 focus:outline-none"
                 >
