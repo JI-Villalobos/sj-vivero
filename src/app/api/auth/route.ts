@@ -1,8 +1,5 @@
 import { cookies } from "next/headers"
-import { urls } from "../../../lib/urls"
-import { AuthenticateRequest, handleLogin } from "@/src/lib/login"
-import { NextApiRequest } from "next"
-import { NextResponse } from "next/server"
+import { handleLogin } from "@/src/lib/login"
 
 export interface AccessToken {
     token: string

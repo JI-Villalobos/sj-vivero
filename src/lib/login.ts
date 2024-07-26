@@ -3,8 +3,7 @@ export interface AuthenticateRequest {
     pass: string
 }
 
-import axios, { AxiosResponse } from "axios"
-import { AccessToken } from "../app/api/auth/route"
+import axios from "axios"
 import { urls } from "./urls"
 
 const options = {
