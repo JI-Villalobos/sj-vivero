@@ -1,12 +1,28 @@
 'use client'
 
-import { handleLogin } from "@/src/actions/actions"
-
 export const LoginForm = () => {
+
     const handleSubmit = async (event: {target: any, preventDefault: () => void}) => {
         const formData = new FormData(event.target)
         event.preventDefault()
-        await handleLogin(formData)
+
+        const email = formData.get('email')!.toString()
+        const password = formData.get('password')!.toString()
+
+        const body = {
+            email: email,
+            password: password
+        }
+
+        await fetch('http://localhost:3000/api/auth', {
+                method: 'POST',
+				headers: { 'Content-Type': 'application/json'  },
+				body: JSON.stringify(body)
+        }).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log('err');
+        })
     }
 
     return (

@@ -1,5 +1,4 @@
-import { Menu } from "@/src/components/shared/Menu";
-import Image from "next/image";
+import { Menu } from "@/src/ui/shared/Menu";
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { LoginForm } from "@/src/components/login/LoginForm";
+import { LoginForm } from "@/src/ui/login/LoginForm";
 import Image from "next/image";
 
 export default function Login(){
