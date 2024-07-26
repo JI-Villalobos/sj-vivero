@@ -1,6 +1,9 @@
 'use client'
 
+import { useRouter } from "next/navigation"
+
 export const LoginForm = () => {
+    const router = useRouter()
 
     const handleSubmit = async (event: {target: any, preventDefault: () => void}) => {
         const formData = new FormData(event.target)
@@ -13,13 +16,13 @@ export const LoginForm = () => {
             email: email,
             password: password
         }
-
+        
         await fetch('http://localhost:3000/api/auth', {
                 method: 'POST',
 				headers: { 'Content-Type': 'application/json'  },
 				body: JSON.stringify(body)
         }).then((res) => {
-            console.log(res);
+            router.push("/")
         }).catch((err) => {
             console.log('err');
         })
