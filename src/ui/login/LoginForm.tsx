@@ -1,11 +1,17 @@
 'use client'
 
+import { failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { Spinner } from "../shared/Spinner"
+import { ErrorLabel } from "../shared/ErrorLabel"
 
 export const LoginForm = () => {
+    const [status, setStatus] = useState(initialStatus)
     const router = useRouter()
 
     const handleSubmit = async (event: {target: any, preventDefault: () => void}) => {
+        setStatus(pendingRequest)
         const formData = new FormData(event.target)
         event.preventDefault()
 
@@ -22,9 +28,14 @@ export const LoginForm = () => {
 				headers: { 'Content-Type': 'application/json'  },
 				body: JSON.stringify(body)
         }).then((res) => {
-            router.push("/")
-        }).catch((err) => {
-            console.log('err');
+            if (res.status == 200) {
+                setStatus(initialStatus)
+                router.push("/")
+            } else {
+                setStatus(failedRequest)   
+            }
+        }).catch(() => {
+           setStatus(failedRequest)
         })
     }
 
@@ -72,9 +83,17 @@ export const LoginForm = () => {
                     className="w-full px-3 py-4 text-mp-white bg-mp-green rounded-md focus:bg-mp-light-green 
                                 focus:outline-none"
                 >
-                    Ingresar
+                    {status.isPending ? <Spinner /> : 'Ingresar'}
                 </button>
             </div>
+            {
+                status.error && <ErrorLabel 
+                                    title="Error de autenticación" 
+                                    description="No fue posible acceder con tus credenciales, 
+                                                 revisa que tus datos sean correctos"
+                                />
+            }
+            
         </form>
     )
 }

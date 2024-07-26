@@ -1,7 +1,4 @@
-import Link from "next/link";
 import { BiLeaf } from "react-icons/bi";
-import { BiHomeAlt } from "react-icons/bi";
-import { BiBookBookmark } from "react-icons/bi";
 import { LinkItems } from "./LinkItems";
 
 export const Menu = () => {
