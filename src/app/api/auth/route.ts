@@ -7,6 +7,8 @@ export interface AccessToken {
     role: string
 }
 
+const milisec = 86400000 
+
 export async function POST(req: Request) {
     const cookieStore = cookies()
 
@@ -14,7 +16,7 @@ export async function POST(req: Request) {
         const { email, password } = await req.json()
 
         const result = await handleLogin({ email: email, pass: password }).then((result) => {
-            cookieStore.set('user-profile', JSON.stringify(result.data))
+            cookieStore.set('user-profile', JSON.stringify(result.data), { expires: milisec * 15})
         })
 
         return Response.json({ result })
