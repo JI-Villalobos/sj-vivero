@@ -17,17 +17,25 @@ const Modal = ({ children, onClose, title }: Props) => {
 
 
     const modalContent = (
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-mp-strong-gray">
+        <div className="absolute top-0 left-0 w-full h-full flex 
+                        justify-center items-center bg-mp-dark bg-opacity-35"
+        >
             {/* Wrap the whole Modal inside the newly created StyledModalWrapper
             and use the ref */}
-            <div className="w-svw h-svh">
-                <div className="bg-mp-gray-soft">
+            <div className="w-1/3 opacity-">
+                <div className="bg-mp-white rounded">
                     <div className="flex content-end text-sm">
-                        <button onClick={handleCloseClick}>
+                        <button 
+                            onClick={handleCloseClick} 
+                            className="bg-mp-green w-10 h-10 rounded text-mp-white text-xl 
+                                        m-2 hover:bg-mp-light-green"
+                        >
                             x
                         </button>
                     </div>
-                    {title && <h1>{title}</h1>}
+                    <div className="flex flex-col justify-center w-full">
+                        {title && <h1 className="text-mp-dark text-center">{title}</h1>}
+                    </div>
                     <div className="pt-3">{children}</div>
                 </div>
             </div>

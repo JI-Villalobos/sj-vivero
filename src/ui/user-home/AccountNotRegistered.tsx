@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { BiLeaf } from "react-icons/bi"
 import Modal from "../modals/ModalBase"
+import { AccountRegistry } from "../modals/AccountRegistry"
 
 export const AccountNotRegistered = () => {
     const [showModal, setShowModal] = useState(false)
@@ -30,14 +31,11 @@ export const AccountNotRegistered = () => {
             </div>
 
             {showModal &&
-                <Modal onClose={() => setShowModal(false)}>
-                    Hello from the modal!
+                <Modal onClose={() => setShowModal(false)} title="Registro de nuevo turno">
+                    <AccountRegistry setShowModal={setShowModal}/>
                 </Modal>
             }
 
         </div>
     )
-}
-
-
-//pointer-events-none fixed inset-x-0 bottom-0 
+} 

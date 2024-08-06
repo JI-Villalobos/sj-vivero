@@ -19,7 +19,8 @@ const config: Config = {
       'mp-strong-red': '#991B1B',
       'mp-strong-gray': '#DDDDDD',
       'mp-soft-dark': '#5B596A',
-      'mp-white': '#F8FAFC'
+      'mp-white': '#F8FAFC',
+      'transparent': 'transparent'
     },
     fontFamily: {
       coda: ['Coda', 'sans-serif']

@@ -6,13 +6,13 @@ export async function POST(req: Request) {
     const cookieStore = cookies()
     const userProfile = cookieStore.get('user-profile')
     try {
-        const { sellerId, branchId, date } = await req.json()
+        const { sellerId, date } = await req.json()
         
         if (userProfile) {
             const profile: AccessToken = JSON.parse(userProfile.value);
 
             const result = await newAccounting(
-                { sellerId: sellerId, branchId: branchId, date: date },
+                { sellerId: sellerId, branchId: profile.branchId, date: date },
                 profile.token
             )
 
