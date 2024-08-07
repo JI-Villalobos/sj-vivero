@@ -51,3 +51,10 @@ export interface IncomeRegistry {
 }
   
 export type CreateIncomeRegistry = Omit<IncomeRegistry, 'id' | 'time'>
+
+export interface Seller {
+    id: number,
+    fullName: string,
+    branchId: number,
+    isActive: boolean
+}
