@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from "react"
 import { Spinner } from "../shared/Spinner"
 import axios from "axios"
+import { getCurrentDate } from "@/src/lib/utils"
 
 interface Props {
     setShowModal: Dispatch<SetStateAction<boolean>>
@@ -48,7 +49,7 @@ export const AccountRegistry = ({ setShowModal }: Props) => {
             <p className="text-sm text-center text-mp-green">
                 Registrar nuevo turno con fecha de:
                 <span className="text-mp-blue">
-                    {date.toISOString()}
+                    {getCurrentDate()}
                 </span>
             </p>
             {sellerLoadStatus.isPending ? '' : <p className="text-mp-dark">Vendedora: <span className="text-mp-green">{seller?.fullName}</span></p>}
