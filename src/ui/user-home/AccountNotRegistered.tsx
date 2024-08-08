@@ -10,7 +10,7 @@ export const AccountNotRegistered = () => {
 
     return (
         <div className="px-6 pb-6 mt-10">
-            <div className="pointer-events-auto mx-auto max-w-xl rounded-xl bg-white p-6 shadow-lg 
+            <div className="bg-mp-white opacity-95 pointer-events-auto mx-auto max-w-xl rounded-xl bg-white p-6 shadow-lg 
                             ring-1 ring-gray-900/10"
             >
                 <BiLeaf color="green" className="mt-3" />

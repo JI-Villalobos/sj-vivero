@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <div>
-        <AccountNotRegistered />
       </div>
       <div className="flex">
         {/**<Table />*/}
