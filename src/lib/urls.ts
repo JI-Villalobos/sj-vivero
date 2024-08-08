@@ -3,7 +3,7 @@ export const urls = {
         authenticate: 'http://localhost:8080/jiltsa/api/v1/auth/authenticate'
     },
     accounts: {
-        accounts: 'http://localhost:8080/jiltsa/api/accounts/',
+        accounts: 'http://localhost:8080/jiltsa/api/v1/accounts',
         getLatest: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/accounts/${branchId}`
     },
     sellers: {
