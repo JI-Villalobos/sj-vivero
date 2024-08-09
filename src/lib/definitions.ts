@@ -58,3 +58,13 @@ export interface Seller {
     branchId: number,
     isActive: boolean
 }
+
+export interface ActiveAccounting {
+    id: number,
+    accountingId: number,
+    isActive: boolean,
+    branchId: number,
+    sellerId: number
+}
+
+export type CreateActiveAccounting = Omit<ActiveAccounting, 'id'>

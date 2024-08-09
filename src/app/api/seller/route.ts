@@ -11,9 +11,8 @@ export async function GET() {
         const profile: AccessToken = JSON.parse(userProfile.value);
         const result: Seller = await getSellerByBranch(profile.branchId, profile.token)
     
-        
         return Response.json({ result })
     } else {
-        
+        return Response.error()
     }
 }

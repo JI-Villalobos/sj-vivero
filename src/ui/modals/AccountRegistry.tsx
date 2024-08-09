@@ -1,6 +1,6 @@
 'use client'
 
-import { failedRequest, initialStatus, pendingRequest, Seller } from "@/src/lib/definitions"
+import { Accounting, failedRequest, initialStatus, pendingRequest, Seller } from "@/src/lib/definitions"
 import { useRouter } from "next/navigation"
 import { Dispatch, MouseEvent, MouseEventHandler, SetStateAction, useEffect, useState } from "react"
 import { Spinner } from "../shared/Spinner"
@@ -38,13 +38,16 @@ export const AccountRegistry = ({ setShowModal }: Props) => {
             date: getCurrentDate()
         }
 
-        await axios.post('http://localhost:3000/api/accounts', body).then((res) => {
-            console.log(res.config.data);
-            setStatus(initialStatus)
-            router.push("/")
-        }).catch((err) => {
-            setStatus(failedRequest)
-        })
+        await axios.post('http://localhost:3000/api/accounts', body)
+            .then((res) => {
+                const accounting: Accounting = JSON.parse(res.config.data)
+                setStatus(initialStatus)
+            }).finally(() => {
+                router.push("/")
+            })
+            .catch(() => {
+                setStatus(failedRequest)
+            })
     }
 
     if (sellerLoadStatus.isPending) {
@@ -61,17 +64,17 @@ export const AccountRegistry = ({ setShowModal }: Props) => {
         return (
             <div className="flex flex-col items-center">
                 <div className="rounded bg-none w-full h-full p-4 m-8 flex items-center justify-center">
-                <p className="text-sm text-center text-mp-strong-red">
-                    Un error inesperado provoco que no fuese posible registrar tu turno,
-                    porfavor contacta a tu administrador tomado esta captura de pantalla.   
-                </p>
-                
-                <button
-                    className="bg-none border border-mp-strong-red text-mp-blue rounded p-2 m-6 w-2/3"
-                    onClick={() => setShowModal(false)}
-                >
-                    Salir
-                </button>
+                    <p className="text-sm text-center text-mp-strong-red">
+                        Un error inesperado provoco que no fuese posible registrar tu turno,
+                        porfavor contacta a tu administrador tomado esta captura de pantalla.
+                    </p>
+
+                    <button
+                        className="bg-none border border-mp-strong-red text-mp-blue rounded p-2 m-6 w-2/3"
+                        onClick={() => setShowModal(false)}
+                    >
+                        Salir
+                    </button>
                 </div>
             </div>
         )
