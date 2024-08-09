@@ -10,15 +10,14 @@ const options = {
   
 export const getLatestRegistries = async (branchId: number, token: string) => {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
-    const response = await axios.get(urls.accounts.getLatest(branchId))
-  
+    const response = await axios.get(urls.accounts.getLatest(branchId), options)
+    
     return response.data
 }
   
 export const newAccounting = async (accounting: CreateAccounting, token: string) => {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
     const response = await axios.post(urls.accounts.accounts, accounting, options)
-  
   
     return response
 }
