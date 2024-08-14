@@ -1,6 +1,5 @@
 import { Accounting } from "@/src/lib/definitions"
 import { RowItem } from "./RowItem"
-import axios from "axios"
 import { cookies } from "next/headers"
 import { getLatestRegistries } from "@/src/lib/accounts"
 import { AccessToken } from "@/src/app/api/auth/route"
@@ -8,8 +7,6 @@ import { AccessToken } from "@/src/app/api/auth/route"
 export const Table = async () => {
     const cookieStore = cookies()
     const userProfile = cookieStore.get('user-profile')
-    console.log(userProfile);
-    
     
     const profile: AccessToken = JSON.parse(userProfile?.value!)
 

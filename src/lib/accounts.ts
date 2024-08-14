@@ -26,16 +26,16 @@ export const newAccounting = async (accounting: CreateAccounting, token: string)
     const { data }: AxiosResponse<Accounting[]> = await axios.get(endPoints.accountings.getByDate(initial, end, branchId), options)
   
     return data
-  }
+  }*/
   
-  export const getAccounting = async (accountingId: number): Promise<Accounting> => {
+  export const getAccounting = async (accountingId: number, token: string) => {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
-    const { data }: AxiosResponse<Accounting> = await axios.get<Accounting>(endPoints.accountings.getAccounting(accountingId), options)
+    const { data } = await axios.get(urls.accounts.getById(accountingId), options)
   
     return data
   }
   
-  export const newAccounting = async (accounting: CreateAccounting): Promise<Accounting> => {
+ /* export const newAccounting = async (accounting: CreateAccounting): Promise<Accounting> => {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
     const { data }: AxiosResponse<Accounting> = await axios.post(endPoints.accountings.createAccounting, accounting, options) 
   

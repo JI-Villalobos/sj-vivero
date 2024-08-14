@@ -4,7 +4,8 @@ export const urls = {
     },
     accounts: {
         accounts: 'http://localhost:8080/jiltsa/api/v1/accounts',
-        getLatest: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/accounts/${branchId}`
+        getLatest: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/accounts/${branchId}`,
+        getById: (accountingId: number) => `http://localhost:8080/jiltsa/api/v1/accounts/account/${accountingId}`
     },
     active_accounts: {
         post: 'http://localhost:8080/jiltsa/api/v1/active-accounting',
