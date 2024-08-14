@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { AccessToken } from "../api/auth/route";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
+import { ActiveAccounting } from "@/src/lib/definitions";
 
 export default async function Home() {
   const cookieStore = cookies()
@@ -12,16 +13,16 @@ export default async function Home() {
     
   const profile: AccessToken = JSON.parse(userProfile?.value!)
 
-  await getCurrentAccounting(profile.branchId, profile.token).then((res) => {
-    if (res == null) {
-      redirect('/not-account')
-    }
-  })
+  const active: ActiveAccounting  = await getCurrentAccounting(profile.branchId, profile.token)
+
+  if (active == null) {
+    redirect('/not-account')
+  }
 
   return (
     <main className="flex flex-col">
       <div className="w-full flex flex-auto items-center justify-center">
-        <AccountingInfo />
+        <AccountingInfo accountingId={active.accountingId}/>
       </div>
       <div className="flex">
         <Table />
