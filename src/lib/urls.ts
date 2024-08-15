@@ -26,6 +26,7 @@ export const urls = {
         mutate: `http://localhost:8080/jiltsa/api/v1/partials`
     },
     expenses: {
-        types: 'http://localhost:8080/jiltsa/api/v1/expenses-types'
+        types: 'http://localhost:8080/jiltsa/api/v1/expenses-types',
+        mutate: 'http://localhost:8080/jiltsa/api/v1/expenses'
     }
 }

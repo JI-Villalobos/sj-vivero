@@ -12,7 +12,7 @@ export const NewExpenseForm = () => {
     const [types, setTypes] = useState<ExpenseType[]>([])
     const [selectedItem, setSelectedItem] = useState<ExpenseType>({ id: 0, type: '' })
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
-
+    const [successSubmit, setSuccessSubmit] = useState(false)
 
     useEffect(() => {
         setLoadAccountInfoStatus(pendingRequest)
@@ -38,8 +38,8 @@ export const NewExpenseForm = () => {
     }, [])
 
 
-    const handleSubmit = async (event: {target: any, preventDefault: () => void}) => {
-        //setSubmitStatus(pendingRequest)
+    const handleSubmit = async (event: { target: any, preventDefault: () => void }) => {
+        setSubmitStatus(pendingRequest)
         const formData = new FormData(event.target)
         event.preventDefault()
 
@@ -53,16 +53,28 @@ export const NewExpenseForm = () => {
             amount: amount
         }
 
-        console.log(body);
-        
+        await axios.post('http://localhost:3000/api/expenses', body)
+            .then(() => { 
+                setSubmitStatus(initialStatus) 
+                handleSuccessMessage()
+            })
+            .catch(() => { setSubmitStatus(failedRequest) })
+    }
+
+
+    const handleSuccessMessage = () => {
+        setTimeout(() => {
+            setSuccessSubmit(false)    
+        }, 2000)
+        setSuccessSubmit(true)
     }
 
     const handleSelectedExpenseType = (id: number) => {
         const expenseType = types.find((type) => type.id == id)
         if (expenseType) {
-          setSelectedItem(expenseType)
+            setSelectedItem(expenseType)
         }
-      }
+    }
 
     return (
         <form action="#" className="mb-0 mt-2 space-y-4 rounded-lg p-4 sm:p-6 lg:p-8 flex flex-col items-center w-full" onSubmit={handleSubmit}>
@@ -98,7 +110,7 @@ export const NewExpenseForm = () => {
                             : <select
                                 name="expenseType"
                                 id="expenseType"
-                                className="w-2/3 rounded-lg border border-mp-gray-soft p-3 text-gray-700 sm:text-sm"
+                                className="rounded-lg border border-mp-gray-soft p-3 text-gray-700 sm:text-sm"
                                 onChange={(e: ChangeEvent<HTMLSelectElement>) => handleSelectedExpenseType(parseInt(e.currentTarget.value))}
                             >
                                 <option value="">Seleciona el tipo de gasto</option>
@@ -144,21 +156,23 @@ export const NewExpenseForm = () => {
             <button
                 type="submit"
                 className="block p-3 w-1/2 rounded-lg bg-mp-dark text-mp-gray-soft text-sm font-medium text-white"
-                onClick={/*handleNewExpense*/ () => { }}
             >
-                Registrar
-                {/*
-            status.onLoading
-                ? <Spinner />
-                : 'Registrar >>'
-            */}
+                {
+                    submitStatus.isPending ? <Spinner /> : 'Registrar'
+                }
             </button>
-            {/*
-            status.onError &&
-            <p className="text-center text-sm text-mp-error p-1">
-            Error al registrar el gasto: Revisa que los datos sean correctos
-            </p>
-        */}
+            {
+                submitStatus.error &&
+                <p className="text-center text-sm text-mp-error p-1">
+                    Error al registrar el gasto: Revisa que los datos sean correctos
+                </p>
+            }
+            {
+                successSubmit && 
+                <p className="text-center text-sm text-mp-green p-1">
+                    Registro exitoso!!
+                </p>
+            }
         </form>
     )
 }
