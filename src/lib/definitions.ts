@@ -68,3 +68,25 @@ export interface ActiveAccounting {
 }
 
 export type CreateActiveAccounting = Omit<ActiveAccounting, 'id'>
+
+export interface CreditSale {
+    id: number
+    concept: string
+    client: string
+    date: string
+    amount: number
+    branchId: number
+    isPaid: boolean
+    partials: Partial[]
+}
+
+export interface Partial{
+    id: number
+    creditSaleId: number
+    paymentDate: string
+    amount: number
+}
+
+export type CreateCreditSale = Omit<CreditSale, 'id' | 'isPaid' | 'partials'>
+export type UpdateCreditSale = Omit<CreditSale, 'partials'>
+export type CreatePartial = Omit<Partial, 'id'>
