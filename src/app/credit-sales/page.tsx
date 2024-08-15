@@ -4,6 +4,7 @@ import { AccessToken } from "../api/auth/route";
 import { CreditSale } from "@/src/lib/definitions";
 import { getCreditSales } from "@/src/lib/credit-sales";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function CreditSales() {
 
@@ -12,7 +13,7 @@ export default async function CreditSales() {
       
     const profile: AccessToken = JSON.parse(userProfile?.value!)
 
-    const creditSales: CreditSale[] = await getCreditSales(profile.branchId, profile.token)
+    const creditSales: CreditSale[] = await getCreditSales(profile.branchId, profile.token).catch(() => redirect('/temp-error'))
 
     return(
         <main className="flex flex-col w-full justify-center">

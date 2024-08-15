@@ -13,7 +13,7 @@ export default async function Home() {
     
   const profile: AccessToken = JSON.parse(userProfile?.value!)
 
-  const active: ActiveAccounting  = await getCurrentAccounting(profile.branchId, profile.token)
+  const active: ActiveAccounting  = await getCurrentAccounting(profile.branchId, profile.token).catch(() => redirect('/temp-error'))
 
   if (active == null) {
     redirect('/not-account')

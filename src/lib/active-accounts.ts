@@ -19,7 +19,7 @@ export const createActiveAccount = async (activeAccount: CreateActiveAccounting,
 export const getCurrentAccounting = async (branchId: number, token: string) => {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
     const response = await axios.get(urls.active_accounts.getCurrent(branchId), options)
-
+    
     return response.data
 }
 
