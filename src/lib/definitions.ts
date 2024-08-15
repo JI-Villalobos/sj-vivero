@@ -90,3 +90,14 @@ export interface Partial{
 export type CreateCreditSale = Omit<CreditSale, 'id' | 'isPaid' | 'partials'>
 export type UpdateCreditSale = Omit<CreditSale, 'partials'>
 export type CreatePartial = Omit<Partial, 'id'>
+
+export interface ExpenseType {
+    id: number,
+    type: string
+  }
+  
+  export interface IncomeType {
+    id: number,
+    type: string
+  }
+  

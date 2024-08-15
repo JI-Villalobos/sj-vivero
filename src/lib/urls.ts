@@ -24,5 +24,8 @@ export const urls = {
     partialPayments: {
         getById: (partialId: number) => `http://localhost:8080/jiltsa/api/v1/partials/${partialId}`,
         mutate: `http://localhost:8080/jiltsa/api/v1/partials`
+    },
+    expenses: {
+        types: 'http://localhost:8080/jiltsa/api/v1/expenses-types'
     }
 }

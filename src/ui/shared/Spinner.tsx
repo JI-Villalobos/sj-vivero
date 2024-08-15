@@ -1,14 +1,24 @@
-export const Spinner = () => {
+'use client'
+
+import clsx from "clsx"
+
+interface Props {
+    bgBlank?: boolean
+}
+
+export const Spinner = ({ bgBlank }: Props) => {
     return (
-        <div className="w-full flex items-center justify-center">
-            <div
-                className="animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-0 border-l-2
-             text-mp-white rounded-full"
-                role="status"
-                aria-label="loading"
-            >
-                <span className="sr-only">Loading...</span>
-            </div>
+        <div 
+            className={clsx(
+                'animate-spin inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-mp-gray-soft rounded-full dark:text-white',
+                {
+                    'text-mp-green': bgBlank === true
+                }
+            )} 
+            role="status" 
+            aria-label="loading"
+        >
+            <span className="sr-only">Loading...</span>
         </div>
     )
 }

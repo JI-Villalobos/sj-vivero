@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { AccessToken } from "../auth/route";
-import { createActiveAccount } from "@/src/lib/active-accounts";
+import { createActiveAccount, getCurrentAccounting } from "@/src/lib/active-accounts";
+import { ActiveAccounting } from "@/src/lib/definitions";
 
 export async function POST(req: Request) {
     const cookieStore = cookies()
@@ -17,6 +18,22 @@ export async function POST(req: Request) {
             ).then((res) => {
                 console.info(res);
             })    
+
+            return Response.json({ result })
+        }
+    } catch (error) {
+        return Response.error()
+    }
+}
+
+export async function GET(req: Request){
+    const cookieStore = cookies()
+    const userProfile = cookieStore.get('user-profile')
+
+    try {
+        if (userProfile) {
+            const profile: AccessToken = JSON.parse(userProfile.value);
+            const result: ActiveAccounting = await getCurrentAccounting(profile.branchId, profile.token)
 
             return Response.json({ result })
         }

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { MutationButton } from "./MutationButton"
 import Modal from "../modals/ModalBase"
+import { NewExpenseForm } from "./forms/NewExpenseForm"
 
 export const MutationWraper = () => {
     const [expenseModal, setExpenseModal] = useState(false)
@@ -23,8 +24,8 @@ export const MutationWraper = () => {
             </div>
             {
                 expenseModal && 
-                    <Modal onClose={() => setExpenseModal(false)} title="Registro de un nuevo gasto">
-                        <div></div>
+                    <Modal onClose={() => setExpenseModal(false)}>
+                        <NewExpenseForm />
                     </Modal>
             }
             {
