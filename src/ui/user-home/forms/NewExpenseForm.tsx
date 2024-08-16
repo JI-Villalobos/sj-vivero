@@ -2,10 +2,14 @@
 
 import { ActiveAccounting, ExpenseType, failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
 import axios from "axios"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Spinner } from "../../shared/Spinner"
 
-export const NewExpenseForm = () => {
+interface Props {
+    setShowModal: Dispatch<SetStateAction<boolean>>
+}
+
+export const NewExpenseForm = ({ setShowModal }: Props) => {
     const [loadAccountInfoStatus, setLoadAccountInfoStatus] = useState(initialStatus)
     const [loadExpenseTypesStatus, setLoadExpenseTypesStatus] = useState(initialStatus)
     const [activeAccount, setActiveAccount] = useState<ActiveAccounting>()
@@ -57,6 +61,7 @@ export const NewExpenseForm = () => {
             .then(() => { 
                 setSubmitStatus(initialStatus) 
                 handleSuccessMessage()
+                setShowModal(false)
             })
             .catch(() => { setSubmitStatus(failedRequest) })
     }

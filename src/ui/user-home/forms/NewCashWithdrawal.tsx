@@ -1,3 +1,5 @@
+'use client'
+
 import { ActiveAccounting, Branch, failedRequest, initialStatus, pendingRequest, Seller } from "@/src/lib/definitions"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Spinner } from "../../shared/Spinner"
@@ -117,10 +119,6 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
                     name="concept"
                     id="concept"
                     className="mt-1.5 w-full p-2 rounded-lg border border-mp-gray-soft text-mp-soft-dark sm:text-sm"
-                /*onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                    setCashWithdrawal({ ...cashWithDrawal, concept: e.currentTarget.value })
-                    setConcept(e.currentTarget.value)
-                }}*/
                 >
                     <option value="">Selecciona el concepto</option>
                     {
@@ -135,9 +133,6 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
                 type="number"
                 placeholder="Monto del retiro"
                 className="rounded-lg w-2/4 p-2 border border-mp-gray-soft m-2 text-center text-mp-dark"
-            /*onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                setCashWithdrawal({ ...cashWithDrawal, amount: parseInt(e.currentTarget.value) })
-            }}*/
             />
             {
                 loadBranchInfoStatus.error || loadSellerNameStatus.error ? 
@@ -145,10 +140,7 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
                         No fue posible cargar la información necesaria para registrar un nuevo deposito
                     </p>
                     : (
-                        <button
-                            className="bg-mp-green rounded text-mp-white text-sm p-3 w-1/3 m-6"
-                            //onClick={}
-                        >
+                        <button className="bg-mp-green rounded text-mp-white text-sm p-3 w-1/3 m-6">
                             {submitStatus.isPending ? <Spinner /> : 'Registrar'}
                         </button>
                     )

@@ -26,7 +26,7 @@ export const MutationWraper = () => {
             {
                 expenseModal && 
                     <Modal onClose={() => setExpenseModal(false)}>
-                        <NewExpenseForm />
+                        <NewExpenseForm setShowModal={setExpenseModal}/>
                     </Modal>
             }
             {
