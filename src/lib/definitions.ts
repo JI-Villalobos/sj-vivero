@@ -38,7 +38,7 @@ export interface ExpenseRegistry {
     time?: string,
     amount: number
 }
-  
+
 export type CreateExpenseRegistry = Omit<ExpenseRegistry, 'id' | 'time'>
 
 export interface IncomeRegistry {
@@ -49,7 +49,7 @@ export interface IncomeRegistry {
     time?: string,
     amount: number
 }
-  
+
 export type CreateIncomeRegistry = Omit<IncomeRegistry, 'id' | 'time'>
 
 export interface Seller {
@@ -80,7 +80,7 @@ export interface CreditSale {
     partials: Partial[]
 }
 
-export interface Partial{
+export interface Partial {
     id: number
     creditSaleId: number
     paymentDate: string
@@ -94,10 +94,27 @@ export type CreatePartial = Omit<Partial, 'id'>
 export interface ExpenseType {
     id: number,
     type: string
-  }
-  
-  export interface IncomeType {
+}
+
+export interface IncomeType {
     id: number,
     type: string
-  }
-  
+}
+
+export interface CashWithdrawal {
+    id: number,
+    date: string,
+    amount: number,
+    concept: string,
+    sellerName: string,
+    branch: string
+}
+
+export type CreateCashWithdrawal = Omit<CashWithdrawal, | 'id' | 'date'>
+
+
+export interface Branch {
+    id: number,
+    name: string,
+    isActive: boolean
+}

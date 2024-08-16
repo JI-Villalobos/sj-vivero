@@ -24,3 +24,5 @@ export const formatAmount = (amount: number): string => {
 
     return formatter.format(amount)
 }
+
+export const conceptList = ["Cobro con tarjeta", "BBVA", "COPPEL", "HSBC", "BANORTE", "BANREGIO", "OTROS"]

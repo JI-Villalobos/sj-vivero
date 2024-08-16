@@ -28,5 +28,11 @@ export const urls = {
     expenses: {
         types: 'http://localhost:8080/jiltsa/api/v1/expenses-types',
         mutate: 'http://localhost:8080/jiltsa/api/v1/expenses'
+    },
+    withdrawals: {
+        mutate: 'http://localhost:8080/jiltsa/api/v1/withdrawals'
+    },
+    branch: {
+        getById: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/branches/${branchId}`,
     }
 }
