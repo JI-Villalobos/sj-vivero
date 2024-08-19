@@ -1,3 +1,5 @@
+import { ExpenseRegistry, IncomeRegistry } from "./definitions";
+
 export const getCurrentDate = () => {
     const date = new Date()
     const fixed = date.getTimezoneOffset() * 60000;
@@ -26,3 +28,12 @@ export const formatAmount = (amount: number): string => {
 }
 
 export const conceptList = ["Cobro con tarjeta", "BBVA", "COPPEL", "HSBC", "BANORTE", "BANREGIO", "OTROS"]
+
+export function summarize<T extends IncomeRegistry | ExpenseRegistry>(entities: T[]) {
+
+    if (entities.length < 1) {
+        return 0
+    } else {
+        return entities.map(entity => entity.amount).reduce((result, value) => result + value)
+    }
+}

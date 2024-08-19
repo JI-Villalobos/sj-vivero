@@ -20,10 +20,9 @@ export const Table = async () => {
                         <tr className="bg-mp-soft-dark text-mp-white">
                             <th className="py-2 px-6 text-left text-xs">Vendor</th>
                             <th className="py-2 px-6 text-left text-xs">Fecha</th>
-                            <th className="py-2 px-6 text-left text-xs">Otros</th>
-                            <th className="py-2 px-6 text-left text-xs">Vivero</th>
-                            <th className="py-2 px-6 text-left text-xs">Total</th>
+                            <th className="py-2 px-6 text-left text-xs">Ventas</th>
                             <th className="py-2 px-6 text-left text-xs">Gastos</th>
+                            <th className="py-2 px-6 text-left text-xs">Detalles</th>
                         </tr>
                     </thead>
                     <tbody className="">
