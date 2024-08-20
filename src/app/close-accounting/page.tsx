@@ -5,9 +5,9 @@ import { ActiveAccounting } from "@/src/lib/definitions";
 import { getCurrentAccounting } from "@/src/lib/active-accounts";
 import { redirect } from "next/navigation";
 import { TotalBalanceItem } from "@/src/ui/close-accounting/TotalBalanceItem";
-import { IncomeSummary } from "@/src/ui/close-accounting/IncomeSummary";
 import { Summary } from "@/src/ui/close-accounting/Summary";
 import { WithdrawalSummary } from "@/src/ui/close-accounting/WithdrawalSummary";
+import { CloseAccountingButton } from "@/src/ui/close-accounting/CloseAccountingButton";
 
 export default async function CloseAccounting() {
     const cookieStore = cookies()
@@ -26,6 +26,9 @@ export default async function CloseAccounting() {
             <Summary accountingId={active.accountingId} />
             <div className="flex justify-center">
                 <WithdrawalSummary />
+            </div>
+            <div className="flex justify-center mt-8 ">
+                <CloseAccountingButton />
             </div>
         </div>
     )
