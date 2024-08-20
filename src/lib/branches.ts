@@ -16,3 +16,9 @@ export const getBranchById = async (branchId: number, token: string) => {
 }
 
 
+export const getTotalBalance = async (branchId: number, token: string) => {
+    axios.defaults.headers.Authorization = `Bearer ${token}`
+    const { data } = await axios.get(urls.branch.getTotalBalance(branchId), options)
+
+    return data
+}

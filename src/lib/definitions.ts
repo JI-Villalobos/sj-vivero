@@ -118,3 +118,7 @@ export interface Branch {
     name: string,
     isActive: boolean
 }
+
+export interface TotalBalance {
+    totals: number
+}
