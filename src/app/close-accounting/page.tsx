@@ -5,6 +5,8 @@ import { ActiveAccounting } from "@/src/lib/definitions";
 import { getCurrentAccounting } from "@/src/lib/active-accounts";
 import { redirect } from "next/navigation";
 import { TotalBalanceItem } from "@/src/ui/close-accounting/TotalBalanceItem";
+import { IncomeSummary } from "@/src/ui/close-accounting/IncomeSummary";
+import { Summary } from "@/src/ui/close-accounting/Summary";
 
 export default async function CloseAccounting() {
     const cookieStore = cookies()
@@ -20,6 +22,7 @@ export default async function CloseAccounting() {
                 <AccountingInfo accountingId={active.accountingId}/>
                 <TotalBalanceItem />
             </div>
+            <Summary accountingId={active.accountingId}/>
         </div>
     )
 }
