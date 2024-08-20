@@ -4,6 +4,7 @@ import { ActiveAccounting, failedRequest, initialStatus, pendingRequest } from "
 import axios from "axios"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Spinner } from "../shared/Spinner"
+import { useRouter } from "next/navigation"
 
 interface Props {
     setShowModal: Dispatch<SetStateAction<boolean>>
@@ -14,6 +15,7 @@ export const NewIncomeForm = ({ setShowModal }: Props) => {
     const [loadActiveAccountingstatus, setLoadActiveAccountingStatus] = useState(initialStatus)
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
     const [successSubmit, setSuccessSubmit] = useState(false)
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -28,6 +30,36 @@ export const NewIncomeForm = ({ setShowModal }: Props) => {
             })
     }, [])
 
+    const handleSuccessMessage = () => {
+        setTimeout(() => {
+            setSuccessSubmit(false)
+            router.push("/close-accounting")
+            setShowModal(false)    
+        }, 2000)
+        setSuccessSubmit(true)
+    }
+
+    const handleSubmit = async (event: { target: any, preventDefault: () => void }) => {
+        setSubmitStatus(pendingRequest)
+        const formData = new FormData(event.target)
+        event.preventDefault()
+
+        const amount = formData.get('amount')?.toString()
+
+        const body = {
+            amount: amount,
+            accountingId: activeAccounting?.accountingId,
+            incomeTypeId: 3,
+            tag: 'VIVERO'
+        }
+
+        await axios.post('http://localhost:3000/api/incomes', body)
+            .then(() => {
+                setSubmitStatus(initialStatus)
+                handleSuccessMessage()
+            })
+    }
+
     if (loadActiveAccountingstatus.isPending) {
         return (
             <div className="rounded flex p-8 flex-col justify-center items-center mt-6">
@@ -41,8 +73,8 @@ export const NewIncomeForm = ({ setShowModal }: Props) => {
             <div className="flex flex-col items-center">
                 <div className="rounded bg-none w-full h-full p-4 m-8 flex items-center justify-center">
                     <p className="text-sm text-center text-mp-strong-red">
-                        Un error inesperado provoco que no fuese posible registrar las ventas,
-                        porfavor contacta a tu administrador tomado esta captura de pantalla.
+                        Un error inesperado provoco que no fuese posible cargar la información del turno actual,
+                        porfavor contacta a tu administrador tomando esta captura de pantalla.
                     </p>
                 </div>
             </div>
@@ -50,7 +82,7 @@ export const NewIncomeForm = ({ setShowModal }: Props) => {
     }
 
     return (
-        <form action="" className="rounded flex flex-col justify-center items-center mt-2">
+        <form onSubmit={handleSubmit} className="rounded flex flex-col justify-center items-center mt-2">
             <p className="text-mp-blue font-semibold m-2">Registro de Ventas</p>
             {
 

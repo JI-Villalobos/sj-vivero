@@ -121,4 +121,4 @@ export interface Branch {
 
 export interface TotalBalance {
     totals: number
-}
+} 

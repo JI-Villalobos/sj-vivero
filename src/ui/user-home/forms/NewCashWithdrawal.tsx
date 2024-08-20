@@ -95,8 +95,8 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
             <div className="flex flex-col items-center">
                 <div className="rounded bg-none w-full h-full p-4 m-8 flex items-center justify-center">
                     <p className="text-sm text-center text-mp-strong-red">
-                        Un error inesperado provoco que no fuese posible registrar el déposito,
-                        porfavor contacta a tu administrador tomado esta captura de pantalla.
+                        Un error inesperado provoco que no fuese posible los datos del turno actual,
+                        porfavor contacta a tu administrador tomando esta captura de pantalla.
                     </p>
                 </div>
             </div>
@@ -148,7 +148,7 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
              {
                 submitStatus.error &&
                 <p className="text-center text-sm text-mp-error p-1">
-                    Error al registrar el gasto: Revisa que los datos sean correctos
+                    Error al registrar el déposito: Revisa que los datos sean correctos
                 </p>
             }
             {
