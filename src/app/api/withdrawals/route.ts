@@ -14,7 +14,10 @@ export async function POST(req: Request) {
             const result = await createCashRegistry(
                 {amount: amount, concept: concept, sellerName: sellerName, branch: branch},
                 profile.token
-            ).then((res) => console.log(res))
+            ).then((res) => {
+                console.log(res)
+                cookieStore.set('withdrawals', JSON.stringify(res), { expires: Date.now() + 43200000 })
+            })
             .catch(() => {return Response.error()})
 
             return Response.json({ result })

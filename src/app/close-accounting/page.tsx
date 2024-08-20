@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { TotalBalanceItem } from "@/src/ui/close-accounting/TotalBalanceItem";
 import { IncomeSummary } from "@/src/ui/close-accounting/IncomeSummary";
 import { Summary } from "@/src/ui/close-accounting/Summary";
+import { WithdrawalSummary } from "@/src/ui/close-accounting/WithdrawalSummary";
 
 export default async function CloseAccounting() {
     const cookieStore = cookies()
@@ -19,10 +20,13 @@ export default async function CloseAccounting() {
     return (
         <div>
             <div className="w-full flex flex-row items-center justify-center">
-                <AccountingInfo accountingId={active.accountingId}/>
+                <AccountingInfo accountingId={active.accountingId} />
                 <TotalBalanceItem />
             </div>
-            <Summary accountingId={active.accountingId}/>
+            <Summary accountingId={active.accountingId} />
+            <div className="flex justify-center">
+                <WithdrawalSummary />
+            </div>
         </div>
     )
 }
