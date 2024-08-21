@@ -5,6 +5,7 @@ import { useState } from "react"
 import { MutationButton } from "../user-home/MutationButton"
 import Modal from "../modals/ModalBase"
 import { NewPartialForm } from "./forms/NewPartialForm"
+import { SettleCreditSaleForm } from "./forms/SettleCreditSale"
 
 interface Props {
     sale: CreditSale
@@ -38,7 +39,9 @@ export const MutationWrapper = ({ sale, balance }: Props) => {
             }
             {
                 finishPaymentsModal &&
-                    <Modal onClose={() => setFinishPaymentsModal(false)}><></></Modal>
+                    <Modal onClose={() => setFinishPaymentsModal(false)} title="Liquidar artículo apartado">
+                        <SettleCreditSaleForm sale={sale} outstandingBalance={balance.outstandingBalance} setModal={setFinishPaymentsModal}/>
+                    </Modal>
             }
         </div>
     )
