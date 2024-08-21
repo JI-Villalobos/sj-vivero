@@ -1,5 +1,6 @@
 import { CreditSale } from "@/src/lib/definitions"
 import { formatAmount, formatDate } from "@/src/lib/utils"
+import Link from "next/link"
 
 interface Props {
     creditSale: CreditSale
@@ -35,12 +36,12 @@ export const CreditSaleItem = ({ creditSale }: Props) => {
                 </div>
             </div>
             <div className="col-start-10 col-end-10 flex justify-center items-center text-sm">
-                <button
+                <Link href={`/credit-sales/details/${creditSale.id}`}
                     className="bg-mp-blue flex flex-row p-2 rounded text-mp-white self-center"
                 >
 
                     Detalle
-                </button>
+                </Link>
             </div>
         </div>
     )
