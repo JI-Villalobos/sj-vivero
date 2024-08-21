@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { MutationButton } from "../user-home/MutationButton"
-import { NewCreditSaleForm } from "./NewCreditSaleForm"
 import Modal from "../modals/ModalBase"
+import { NewCreditSaleForm } from "./forms/NewCreditSaleForm"
 
 export const NewCreditSaleButton = () => {
     const [modal, setModal] = useState(false)

@@ -19,7 +19,8 @@ export const urls = {
         getById: (creditSaleId: number) => `http://localhost:8080/jiltsa/api/v1/credit-sale/get/${creditSaleId}`,
         getAll: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/credit-sale/get-all/${branchId}`,
         getByPaymentStatus: (branchId: number, isPaid: boolean) => `http://localhost:8080/jiltsa/api/v1/credit-sale/get-by-status/${branchId}/${isPaid}`,
-        mutate: `http://localhost:8080/jiltsa/api/v1/credit-sale`
+        mutate: `http://localhost:8080/jiltsa/api/v1/credit-sale`,
+        balance:(creditSaleId: number) => `http://localhost:8080/jiltsa/api/v1/credit-sale/balance/${creditSaleId}`
     },
     partialPayments: {
         getById: (partialId: number) => `http://localhost:8080/jiltsa/api/v1/partials/${partialId}`,

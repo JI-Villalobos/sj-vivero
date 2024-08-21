@@ -80,6 +80,12 @@ export interface CreditSale {
     partials: Partial[]
 }
 
+export interface CreditSaleBalance {
+    numberOfPayments: number
+    totalPayments: number
+    outstandingBalance: number
+}
+
 export interface Partial {
     id: number
     creditSaleId: number

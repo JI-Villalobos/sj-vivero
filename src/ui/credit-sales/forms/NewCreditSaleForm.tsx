@@ -1,16 +1,16 @@
 'use client'
 
 import { Dispatch, SetStateAction, useState } from "react"
-import { Spinner } from "../shared/Spinner"
 import { failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import { Spinner } from "../../shared/Spinner"
 
 interface Props {
     setModal: Dispatch<SetStateAction<boolean>>
 }
 
-export const NewCreditSaleForm = ({ setModal }: Props) => {
+export const NewCreditSaleForm = async ({ setModal }: Props) => {
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
     const [succesMessage, setSuccessMessage] = useState(false)
     const router = useRouter()
@@ -19,12 +19,13 @@ export const NewCreditSaleForm = ({ setModal }: Props) => {
         setTimeout(() => {
             setSubmitStatus(initialStatus)
             router.refresh()
-            setModal(false)    
+            setModal(false)
         }, 2000)
-        setSuccessMessage(true)   }
+        setSuccessMessage(true)
+    }
 
 
-    const handleSubmit = async (event: { target: any, preventDefault: () => void }) => { 
+    const handleSubmit = async (event: { target: any, preventDefault: () => void }) => {
         setSubmitStatus(pendingRequest)
         const formData = new FormData(event.target)
         event.preventDefault()
@@ -47,7 +48,7 @@ export const NewCreditSaleForm = ({ setModal }: Props) => {
             })
             .catch(() => {
                 setSubmitStatus(failedRequest)
-            }) 
+            })
     }
 
 
@@ -124,7 +125,7 @@ export const NewCreditSaleForm = ({ setModal }: Props) => {
                 </p>
             }
             {
-                succesMessage && 
+                succesMessage &&
                 <p className="text-center text-sm text-mp-green p-1">
                     Registro exitoso!!
                 </p>

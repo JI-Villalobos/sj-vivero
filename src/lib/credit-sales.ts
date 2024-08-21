@@ -56,3 +56,10 @@ export const createPartial = async (partial: CreatePartial, token: string) => {
 
     return data
 }
+
+export const getCreditSaleBalance = async (creditSaleId: number, token: string) => {
+    axios.defaults.headers.Authorization = `Bearer ${token}`;
+    const { data } = await axios.get(urls.creditSales.balance(creditSaleId), options)
+
+    return data
+}
