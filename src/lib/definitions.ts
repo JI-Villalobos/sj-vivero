@@ -127,4 +127,10 @@ export interface Branch {
 
 export interface TotalBalance {
     totals: number
-} 
+}
+
+export interface BranchConfig {
+    id: number,
+    branchId: number,
+    initialBalance: number
+}

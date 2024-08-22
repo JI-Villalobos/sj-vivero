@@ -1,6 +1,6 @@
 'use client'
 
-import { CreditSale, CreditSaleBalance } from "@/src/lib/definitions"
+import { BranchConfig, CreditSale, CreditSaleBalance } from "@/src/lib/definitions"
 import { useState } from "react"
 import { MutationButton } from "../user-home/MutationButton"
 import Modal from "../modals/ModalBase"
@@ -10,14 +10,12 @@ import { SettleCreditSaleForm } from "./forms/SettleCreditSale"
 interface Props {
     sale: CreditSale
     balance: CreditSaleBalance
+    config: BranchConfig
 }
 
-export const MutationWrapper = ({ sale, balance }: Props) => {
+export const MutationWrapper = ({ sale, balance, config }: Props) => {
     const [newPaymentModal, setNewPaymentModal] = useState(false)
     const [finishPaymentsModal, setFinishPaymentsModal] = useState(false)
-
-    console.log(sale);
-    
 
     return (
         <div className="flex flex-row items-center m-2 w-full justify-center">
@@ -34,13 +32,23 @@ export const MutationWrapper = ({ sale, balance }: Props) => {
             {
                 newPaymentModal &&
                     <Modal onClose={() => setNewPaymentModal(false)} title="Registro de abono">
-                        <NewPartialForm saleId={sale.id} outstandingBalance={balance.outstandingBalance} setModal={setNewPaymentModal}/>
+                        <NewPartialForm 
+                            saleId={sale.id} 
+                            outstandingBalance={balance.outstandingBalance} 
+                            setModal={setNewPaymentModal}
+                            branchBalance={config}
+                        />
                     </Modal>
             }
             {
                 finishPaymentsModal &&
                     <Modal onClose={() => setFinishPaymentsModal(false)} title="Liquidar artículo apartado">
-                        <SettleCreditSaleForm sale={sale} outstandingBalance={balance.outstandingBalance} setModal={setFinishPaymentsModal}/>
+                        <SettleCreditSaleForm 
+                            sale={sale} 
+                            balance={balance} 
+                            setModal={setFinishPaymentsModal}
+                            branchBalance={config}
+                        />
                     </Modal>
             }
         </div>

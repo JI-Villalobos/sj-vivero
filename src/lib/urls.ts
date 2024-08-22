@@ -35,7 +35,9 @@ export const urls = {
     },
     branch: {
         getById: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/branches/${branchId}`,
-        getTotalBalance: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/branches/balance/${branchId}`
+        getTotalBalance: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/branches/balance/${branchId}`,
+        getConfig: (branchId: number) => `http://localhost:8080/jiltsa/api/v1/branch-configuration/get/${branchId}`,
+        updateConfig: (branchConfigId: number) => `http://localhost:8080/jiltsa/api/v1/branch-configuration/${branchConfigId}`
     },
     incomes: {
         mutate: `http://localhost:8080/jiltsa/api/v1/incomes`,

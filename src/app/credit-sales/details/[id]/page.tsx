@@ -1,10 +1,11 @@
 import { cookies } from "next/headers"
 import { AccessToken } from "../../../api/auth/route"
-import { CreditSale, CreditSaleBalance } from "@/src/lib/definitions"
+import { BranchConfig, CreditSale, CreditSaleBalance } from "@/src/lib/definitions"
 import { getCreditSale, getCreditSaleBalance } from "@/src/lib/credit-sales"
 import { formatAmount, formatDate } from "@/src/lib/utils"
 import Link from "next/link"
 import { MutationWrapper } from "@/src/ui/credit-sales/MutationWrapper"
+import { getBranchConfig } from "@/src/lib/branches"
 
 export default async function SaleDetail({ params }: { params: { id: string } }) {
 
@@ -16,6 +17,7 @@ export default async function SaleDetail({ params }: { params: { id: string } })
 
     const sale: CreditSale = await getCreditSale(id, profile.token)
     const balance: CreditSaleBalance = await getCreditSaleBalance(id, profile.token)
+    const branchConfig: BranchConfig = await getBranchConfig(profile.branchId, profile.token)
 
     return (
         <div className="w-full flex flex-col items-center justify-center">
@@ -25,7 +27,7 @@ export default async function SaleDetail({ params }: { params: { id: string } })
                 <p className="m-2 text-mp-dark">Total Pagado: <span className="text-mp-blue">{formatAmount(balance.totalPayments)}</span></p>
                 <p className="m-2 text-mp-dark">Saldo Pendiente: <span className="text-mp-blue">{formatAmount(balance.outstandingBalance)}</span></p>
             </div>
-            <MutationWrapper sale={sale} balance={balance}/>
+            <MutationWrapper sale={sale} balance={balance} config={branchConfig}/>
             <div className="w-1/2 m-4 flow-root rounded-lg border border-mp-gray-soft py-3 shadow-sm">
                 <dl className="-my-3 divide-y divide-mp-gray-soft text-sm">
                     <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4 bg-mp-gray-soft">

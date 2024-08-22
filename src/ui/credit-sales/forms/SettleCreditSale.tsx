@@ -1,4 +1,4 @@
-import { CreditSale, failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
+import { BranchConfig, CreditSale, CreditSaleBalance, failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction, useState } from "react"
@@ -6,12 +6,13 @@ import { Spinner } from "../../shared/Spinner"
 
 interface Props {
     sale: CreditSale
-    outstandingBalance: number
+    balance: CreditSaleBalance
     setModal: Dispatch<SetStateAction<boolean>>
+    branchBalance: BranchConfig
 }
 
 
-export const SettleCreditSaleForm = ({ sale, outstandingBalance, setModal }: Props) => {
+export const SettleCreditSaleForm = ({ sale, balance, setModal, branchBalance }: Props) => {
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
     const [succesMessage, setSuccessMessage] = useState(false)
     const router = useRouter()
@@ -31,26 +32,31 @@ export const SettleCreditSaleForm = ({ sale, outstandingBalance, setModal }: Pro
         event.preventDefault()
 
         const paymentDate = formData.get('paymentDate')?.toString()
-        const amount = formData.get('amount')?.toString()
-
+    
         const body = {
             creditSaleId: sale.id,
             paymentDate: paymentDate,
-            amount: outstandingBalance
+            amount: balance.outstandingBalance
         }
+
+        const accum = branchBalance.initialBalance - balance.totalPayments
+        const config: BranchConfig = { ...branchBalance, initialBalance: accum }
 
         const creditSales: CreditSale = { ...sale, isPaid: true }
 
         await axios.post('http://localhost:3000/api/credit-sales/payment', body)
             .then(() => {
                 axios.put('http://localhost:3000/api/credit-sales', creditSales)
-                    .then(() => {handleSuccessMessage()})
+                    .then(() => {})
                     .catch(() => {setSubmitStatus(failedRequest)})
             })
             .catch(() => {
                 setSubmitStatus(failedRequest)
             })
 
+        await axios.put('http://localhost:3000/api/branch/config', config)
+            .then(() => {handleSuccessMessage()})
+            .catch(() => {setSubmitStatus(failedRequest)})
     }
 
     return (
@@ -79,7 +85,7 @@ export const SettleCreditSaleForm = ({ sale, outstandingBalance, setModal }: Pro
                         name="amount"
                         className="w-full rounded-lg border-mp-soft-dark bg-mp-gray-soft text-mp-soft-dark p-4 pe-12 text-sm shadow-sm"
                         placeholder="Monto"
-                        defaultValue={outstandingBalance}
+                        defaultValue={balance.outstandingBalance}
                         readOnly
                     />
                 </div>

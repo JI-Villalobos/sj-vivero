@@ -1,6 +1,6 @@
 'use client'
 
-import { failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
+import { BranchConfig, failedRequest, initialStatus, pendingRequest } from "@/src/lib/definitions"
 import { Dispatch, SetStateAction, useState } from "react"
 import { Spinner } from "../../shared/Spinner"
 import { useRouter } from "next/navigation"
@@ -10,10 +10,11 @@ interface Props {
     saleId: number
     outstandingBalance: number
     setModal: Dispatch<SetStateAction<boolean>>
+    branchBalance: BranchConfig
 }
 
 
-export const NewPartialForm = ({ saleId, outstandingBalance, setModal }: Props) => {
+export const NewPartialForm = ({ saleId, outstandingBalance, setModal, branchBalance }: Props) => {
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
     const [succesMessage, setSuccessMessage] = useState(false)
     const router = useRouter()
@@ -40,18 +41,24 @@ export const NewPartialForm = ({ saleId, outstandingBalance, setModal }: Props) 
             paymentDate: paymentDate,
             amount: amount
         }
-
         
         if (amount) {
             const payment = parseInt(amount)
+            const accum: number = branchBalance.initialBalance + payment
+
+            const config: BranchConfig = { ...branchBalance, initialBalance: accum }
         
             if (payment < outstandingBalance) {
                 await axios.post('http://localhost:3000/api/credit-sales/payment', body)
                     .then(() => {
-                        handleSuccessMessage()
+                        
                     })
                     .catch(() => {
                         setSubmitStatus(failedRequest)
+                    })
+                await axios.put('http://localhost:3000/api/branch/config', config)
+                    .then(() => {
+                        handleSuccessMessage()
                     })
             } else {
                 setSubmitStatus(failedRequest)
