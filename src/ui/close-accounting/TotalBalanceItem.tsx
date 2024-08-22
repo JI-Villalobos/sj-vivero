@@ -12,7 +12,7 @@ export const TotalBalanceItem = () => {
   
     useEffect(() => {
       setStatus(pendingRequest)
-      axios.get('http://localhost:3000/api/branch/balance')
+      axios.get('/api/branch/balance')
         .then((result) => {
           setTotals(result.data.result)
           setStatus(initialStatus)

@@ -44,9 +44,9 @@ export const SettleCreditSaleForm = ({ sale, balance, setModal, branchBalance }:
 
         const creditSales: CreditSale = { ...sale, isPaid: true }
 
-        await axios.post('http://localhost:3000/api/credit-sales/payment', body)
+        await axios.post('/api/credit-sales/payment', body)
             .then(() => {
-                axios.put('http://localhost:3000/api/credit-sales', creditSales)
+                axios.put('/api/credit-sales', creditSales)
                     .then(() => {})
                     .catch(() => {setSubmitStatus(failedRequest)})
             })
@@ -54,7 +54,7 @@ export const SettleCreditSaleForm = ({ sale, balance, setModal, branchBalance }:
                 setSubmitStatus(failedRequest)
             })
 
-        await axios.put('http://localhost:3000/api/branch/config', config)
+        await axios.put('/api/branch/config', config)
             .then(() => {handleSuccessMessage()})
             .catch(() => {setSubmitStatus(failedRequest)})
     }

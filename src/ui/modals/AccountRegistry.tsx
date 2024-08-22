@@ -19,7 +19,7 @@ export const AccountRegistry = ({ setShowModal }: Props) => {
 
     useEffect(() => {
         setSellerLoadStatus(pendingRequest)
-        axios.get('http://localhost:3000/api/seller')
+        axios.get('/api/seller')
             .then((res) => {
                 const sellers: Seller[] = res.data.result
                 setSeller(sellers[0])
@@ -38,11 +38,10 @@ export const AccountRegistry = ({ setShowModal }: Props) => {
             date: getCurrentDate()
         }
 
-        await axios.post('http://localhost:3000/api/accounts', body)
+        await axios.post('/api/accounts', body)
             .then((res) => {
                 const accounting: Accounting = JSON.parse(res.config.data)
                 setStatus(initialStatus)
-            }).finally(() => {
                 router.push("/")
             })
             .catch(() => {

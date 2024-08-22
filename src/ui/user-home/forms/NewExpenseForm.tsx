@@ -4,6 +4,7 @@ import { ActiveAccounting, ExpenseType, failedRequest, initialStatus, pendingReq
 import axios from "axios"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Spinner } from "../../shared/Spinner"
+import { useRouter } from "next/navigation"
 
 interface Props {
     setShowModal: Dispatch<SetStateAction<boolean>>
@@ -17,12 +18,13 @@ export const NewExpenseForm = ({ setShowModal }: Props) => {
     const [selectedItem, setSelectedItem] = useState<ExpenseType>({ id: 0, type: '' })
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
     const [successSubmit, setSuccessSubmit] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         setLoadAccountInfoStatus(pendingRequest)
         setLoadExpenseTypesStatus(pendingRequest)
 
-        axios.get('http://localhost:3000/api/active-accounts')
+        axios.get('/api/active-accounts')
             .then((res) => {
                 setActiveAccount(res.data.result)
                 setLoadAccountInfoStatus(initialStatus)
@@ -31,7 +33,7 @@ export const NewExpenseForm = ({ setShowModal }: Props) => {
                 setLoadAccountInfoStatus(failedRequest)
             })
 
-        axios.get('http://localhost:3000/api/expenses/def')
+        axios.get('/api/expenses/def')
             .then((res) => {
                 setTypes(res.data.result)
                 setLoadExpenseTypesStatus(initialStatus)
@@ -57,11 +59,10 @@ export const NewExpenseForm = ({ setShowModal }: Props) => {
             amount: amount
         }
 
-        await axios.post('http://localhost:3000/api/expenses', body)
+        await axios.post('/api/expenses', body)
             .then(() => { 
                 setSubmitStatus(initialStatus) 
                 handleSuccessMessage()
-                setShowModal(false)
             })
             .catch(() => { setSubmitStatus(failedRequest) })
     }
@@ -69,7 +70,9 @@ export const NewExpenseForm = ({ setShowModal }: Props) => {
 
     const handleSuccessMessage = () => {
         setTimeout(() => {
-            setSuccessSubmit(false)    
+            setSuccessSubmit(false)
+            setShowModal(false)
+            router.refresh()    
         }, 2000)
         setSuccessSubmit(true)
     }

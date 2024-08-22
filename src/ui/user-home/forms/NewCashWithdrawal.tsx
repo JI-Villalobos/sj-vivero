@@ -24,7 +24,7 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
         setLoadActiveAccountStatus(pendingRequest)
         setLoadSellerNameStatus(pendingRequest)
         setLoadBranchInfoStatus(pendingRequest)
-        axios.get('http://localhost:3000/api/active-accounts')
+        axios.get('/api/active-accounts')
             .then((res) => {
                 setActiveAccount(res.data.result)
                 setLoadActiveAccountStatus(initialStatus)
@@ -32,7 +32,7 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
             .catch(() => {
                 setLoadActiveAccountStatus(failedRequest)
             })
-        axios.get('http://localhost:3000/api/seller')
+        axios.get('/api/seller')
             .then((res) => {
                 setSeller(res.data.result[0])
                 setLoadSellerNameStatus(initialStatus)
@@ -40,7 +40,7 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
             .catch(() => {
                 setLoadSellerNameStatus(failedRequest)
             })
-        axios.get('http://localhost:3000/api/branch')
+        axios.get('/api/branch')
             .then((res) => {
                 setBranch(res.data.result)
                 setLoadBranchInfoStatus(initialStatus)
@@ -73,7 +73,7 @@ export const NewCashWithdrawal = ({ setShowModal }: Props) => {
             branch: branch?.name
         }
 
-        await axios.post('http://localhost:3000/api/withdrawals', body)
+        await axios.post('/api/withdrawals', body)
             .then(() => {
                 setSubmitStatus(initialStatus)
                 handleSuccessMessage()

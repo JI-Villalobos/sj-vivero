@@ -14,7 +14,7 @@ export const CloseAccountingButton = () => {
 
     useEffect(() => {
         setLoadActiveAccounting(pendingRequest)
-        axios.get('http://localhost:3000/api/active-accounts')
+        axios.get('/api/active-accounts')
             .then((res) => {
                 setActiveAccounting(res.data.result)
                 setLoadActiveAccounting(initialStatus)
@@ -30,7 +30,7 @@ export const CloseAccountingButton = () => {
         const body = {
             accountingId: activeAccounting?.accountingId
         }
-        await axios.patch('http://localhost:3000/api/active-accounts', body)
+        await axios.patch('/api/active-accounts', body)
             .then(() => {
                 setSubmitstatus(initialStatus)
                 router.push("/")

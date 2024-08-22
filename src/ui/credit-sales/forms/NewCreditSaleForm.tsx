@@ -42,7 +42,7 @@ export const NewCreditSaleForm = async ({ setModal }: Props) => {
             amount: amount
         }
 
-        await axios.post('http://localhost:3000/api/credit-sales', body)
+        await axios.post('/api/credit-sales', body)
             .then(() => {
                 handleSuccessMessage()
             })

@@ -23,7 +23,7 @@ export const LoginForm = () => {
             password: password
         }
         
-        await fetch('http://localhost:3000/api/auth', {
+        await fetch('/api/auth', {
                 method: 'POST',
 				headers: { 'Content-Type': 'application/json'  },
 				body: JSON.stringify(body)

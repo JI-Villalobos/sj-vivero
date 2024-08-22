@@ -49,14 +49,14 @@ export const NewPartialForm = ({ saleId, outstandingBalance, setModal, branchBal
             const config: BranchConfig = { ...branchBalance, initialBalance: accum }
         
             if (payment < outstandingBalance) {
-                await axios.post('http://localhost:3000/api/credit-sales/payment', body)
+                await axios.post('/api/credit-sales/payment', body)
                     .then(() => {
                         
                     })
                     .catch(() => {
                         setSubmitStatus(failedRequest)
                     })
-                await axios.put('http://localhost:3000/api/branch/config', config)
+                await axios.put('/api/branch/config', config)
                     .then(() => {
                         handleSuccessMessage()
                     })

@@ -20,7 +20,7 @@ export const NewIncomeForm = ({ setShowModal }: Props) => {
 
     useEffect(() => {
         setLoadActiveAccountingStatus(pendingRequest)
-        axios.get('http://localhost:3000/api/active-accounts')
+        axios.get('/api/active-accounts')
             .then((res) => {
                 setActiveAccounting(res.data.result)
                 setLoadActiveAccountingStatus(initialStatus)
@@ -53,7 +53,7 @@ export const NewIncomeForm = ({ setShowModal }: Props) => {
             tag: 'VIVERO'
         }
 
-        await axios.post('http://localhost:3000/api/incomes', body)
+        await axios.post('/api/incomes', body)
             .then(() => {
                 setSubmitStatus(initialStatus)
                 handleSuccessMessage()
