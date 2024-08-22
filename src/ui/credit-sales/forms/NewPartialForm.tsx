@@ -60,6 +60,7 @@ export const NewPartialForm = ({ saleId, outstandingBalance, setModal, branchBal
                     .then(() => {
                         handleSuccessMessage()
                     })
+                    .catch(() => {setSubmitStatus(failedRequest)}) 
             } else {
                 setSubmitStatus(failedRequest)
             }
