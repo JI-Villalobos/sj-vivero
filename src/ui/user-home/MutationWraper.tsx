@@ -51,10 +51,3 @@ export const MutationWraper = () => {
         </>
     )
 }
-
-/*
-<Link href="/close-accounting"
-            className="p-2 bg-mp-blue text-mp-white rounded w-1/12 text-sm text-center m-6 hover:bg-mp-soft-dark"
-          >
-            Cerrar Turno
-          </Link>*/

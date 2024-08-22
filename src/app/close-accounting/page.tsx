@@ -8,6 +8,7 @@ import { TotalBalanceItem } from "@/src/ui/close-accounting/TotalBalanceItem";
 import { Summary } from "@/src/ui/close-accounting/Summary";
 import { WithdrawalSummary } from "@/src/ui/close-accounting/WithdrawalSummary";
 import { CloseAccountingButton } from "@/src/ui/close-accounting/CloseAccountingButton";
+import { PaymentsSummary } from "@/src/ui/close-accounting/PaymentsSummary";
 
 export default async function CloseAccounting() {
     const cookieStore = cookies()
@@ -27,9 +28,13 @@ export default async function CloseAccounting() {
             <div className="flex justify-center">
                 <WithdrawalSummary />
             </div>
-            <div className="flex justify-center mt-8 ">
+            <div className="flex justify-center mt-4 ">
+                <PaymentsSummary />
+            </div>
+            <div className="flex justify-center mt-4 ">
                 <CloseAccountingButton />
             </div>
+            
         </div>
     )
 }

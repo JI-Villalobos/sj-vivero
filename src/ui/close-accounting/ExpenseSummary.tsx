@@ -12,9 +12,9 @@ export const ExpenseSummary = ({ expenses }: Props) => {
     }
 
     return (
-        <div className="flow-root mt-6 w-2/4 shadow-md">
+        <div className="flow-root mt-3 w-2/4 shadow-md">
             <p className="text-center text-2xl font-bold text-mp-blue sm:text-xl mt-2">Resumen de Gastos</p>
-            <dl className="-my-3 divide-y divide-mp-strong-gray text-sm p-4">
+            <dl className="-my-3 divide-y divide-mp-strong-gray text-sm p-2">
                 <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                     <dt className="font-medium text-mp-strong-gray">Gastos</dt>
                     <dd className="text-gray-mp sm:col-span-2"></dd>
@@ -22,7 +22,7 @@ export const ExpenseSummary = ({ expenses }: Props) => {
 
                 {
                     expenses.map((expense) => (
-                        <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4" key={`expense-key-id-${expense.id}`}>
+                        <div className="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-2" key={`expense-key-id-${expense.id}`}>
                             <dt className="font-medium text-mp-green">{expense.description}</dt>
                             <dd className="text-mp-dark sm:col-span-2">{formatAmount(expense.amount)}</dd>
                         </div>

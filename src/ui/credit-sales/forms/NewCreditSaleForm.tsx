@@ -10,7 +10,7 @@ interface Props {
     setModal: Dispatch<SetStateAction<boolean>>
 }
 
-export const NewCreditSaleForm = async ({ setModal }: Props) => {
+export const NewCreditSaleForm =  ({ setModal }: Props) => {
     const [submitStatus, setSubmitStatus] = useState(initialStatus)
     const [succesMessage, setSuccessMessage] = useState(false)
     const router = useRouter()
