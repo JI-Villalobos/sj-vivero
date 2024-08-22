@@ -5,7 +5,6 @@ import { CreditSale } from "@/src/lib/definitions";
 import { getCreditSaleByStatus, getCreditSales } from "@/src/lib/credit-sales";
 import { redirect } from "next/navigation";
 import { NewCreditSaleButton } from "@/src/ui/credit-sales/NewCreditSaleButton";
-import Link from "next/link";
 
 export default async function CreditSales() {
 
@@ -14,17 +13,14 @@ export default async function CreditSales() {
       
     const profile: AccessToken = JSON.parse(userProfile?.value!)
 
-    const creditSales: CreditSale[] = await getCreditSaleByStatus(profile.branchId, false, profile.token).catch(() => redirect('/temp-error'))
+    const creditSales: CreditSale[] = await getCreditSaleByStatus(profile.branchId, true, profile.token).catch(() => redirect('/temp-error'))
 
     return(
         <main className="flex flex-col w-full justify-center">
             <div className="flex flex-row justify-center items-center m-6">
-                <p className="text-mp-green text-xl m-2">Lista de apartados no liquidados</p>
+                <p className="text-mp-green text-xl m-2">Lista de apartados liquidados</p>
                 <NewCreditSaleButton />
             </div>
-            <Link href="/completed-credit-sales" className="text-center text-sm text-mp-blue decoration-solid">
-                Ver lista de apartados ya pagados
-            </Link>
             <div className="flex flex-col justify-center items-center m-10">
                 {
                     creditSales.map((sale) => <CreditSaleItem creditSale={sale} key={`cs-id-${sale.id}`}/>)

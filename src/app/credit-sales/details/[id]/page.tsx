@@ -27,7 +27,9 @@ export default async function SaleDetail({ params }: { params: { id: string } })
                 <p className="m-2 text-mp-dark">Total Pagado: <span className="text-mp-blue">{formatAmount(balance.totalPayments)}</span></p>
                 <p className="m-2 text-mp-dark">Saldo Pendiente: <span className="text-mp-blue">{formatAmount(balance.outstandingBalance)}</span></p>
             </div>
-            <MutationWrapper sale={sale} balance={balance} config={branchConfig}/>
+            {
+                !sale.isPaid && <MutationWrapper sale={sale} balance={balance} config={branchConfig}/>
+            }
             <div className="w-1/2 m-4 flow-root rounded-lg border border-mp-gray-soft py-3 shadow-sm">
                 <dl className="-my-3 divide-y divide-mp-gray-soft text-sm">
                     <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4 bg-mp-gray-soft">
