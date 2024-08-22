@@ -33,7 +33,7 @@ export const CloseAccountingButton = () => {
         await axios.patch('/api/active-accounts', body)
             .then(() => {
                 setSubmitstatus(initialStatus)
-                router.push("/")
+                router.push("/not-account")
             })
             .catch(() => {
                 setSubmitstatus(failedRequest)
