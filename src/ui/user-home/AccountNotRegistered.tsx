@@ -1,12 +1,38 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BiLeaf } from "react-icons/bi"
 import Modal from "../modals/ModalBase"
 import { AccountRegistry } from "../modals/AccountRegistry"
+import { useRouter } from "next/navigation"
+import { initialStatus, pendingRequest } from "@/src/lib/definitions"
+import axios from "axios"
+import { Spinner } from "../shared/Spinner"
 
 export const AccountNotRegistered = () => {
     const [showModal, setShowModal] = useState(false)
+    const [loadActiveStatus, setLoadActiveStatus] = useState(initialStatus)
+    const router = useRouter()
+
+    useEffect(() => {
+        setLoadActiveStatus(pendingRequest)
+        const active = axios.get('/api/active-accounts')
+            .then((res) => {
+                if (res.data.result === null) {
+                    setLoadActiveStatus(initialStatus)
+                } else {
+                    router.push("/")
+                }
+            })
+    }, [])
+
+    if (loadActiveStatus.isPending) {
+        return (
+            <div className="rounded flex p-8 flex-col justify-center items-center mt-6">
+                <Spinner bgBlank={true} />
+            </div>
+        )
+    }
 
     return (
         <div className="px-6 pb-6 mt-10">

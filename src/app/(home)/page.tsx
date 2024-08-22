@@ -13,7 +13,6 @@ export default async function Home() {
   const userProfile = cookieStore.get('user-profile')
 
   const profile: AccessToken = JSON.parse(userProfile?.value!)
-
   const active: ActiveAccounting = await getCurrentAccounting(profile.branchId, profile.token).catch(() => redirect('/temp-error'))
 
   if (active == null) {
@@ -27,8 +26,7 @@ export default async function Home() {
       </div>
       <div className="flex flex-col items-center justify-center">
         <div className="flex flex-row w-full items-center justify-center">
-          <MutationWraper />
-          
+          <MutationWraper />  
         </div>
         <Table />
       </div>
