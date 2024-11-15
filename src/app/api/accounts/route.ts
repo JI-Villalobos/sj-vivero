@@ -1,8 +1,9 @@
 import { cookies } from "next/headers"
 import { AccessToken } from "../auth/route";
-import { newAccounting } from "@/src/lib/accounts";
+import { getAccounting, newAccounting } from "@/src/lib/accounts";
 import { Accounting } from "@/src/lib/definitions";
 import { createActiveAccount } from "@/src/lib/active-accounts";
+import { NextRequest } from "next/server";
 
 export async function POST(req: Request) {
     const cookieStore = cookies()
@@ -27,6 +28,25 @@ export async function POST(req: Request) {
                     return Response.error()
                 })
             })
+
+            return Response.json({ result })
+        }
+    } catch (error) {
+        return Response.error()
+    }
+}
+
+export async function GET(req: NextRequest) {
+    const cookieStore = cookies()
+    const userProfile = cookieStore.get('user-profile')
+
+    try {
+        const search = req.nextUrl.searchParams
+        const id = search.get('id')
+
+        if (id && userProfile) {
+            const profile: AccessToken = JSON.parse(userProfile.value);
+            const result = await getAccounting(parseInt(id), profile.token)
 
             return Response.json({ result })
         }

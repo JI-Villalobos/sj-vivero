@@ -15,7 +15,8 @@ export const urls = {
         patch: (accountingId: number) => `${env.API_URL}/active-accounting/${accountingId}`
     },
     sellers: {
-        get: (branchId: number) => `${env.API_URL}/sellers/branch/${branchId}`
+        get: (branchId: number) => `${env.API_URL}/sellers/branch/${branchId}`,
+        byId: (sellerId: number) => `${env.API_URL}/sellers/${sellerId}`,
     },
     creditSales: {
         getById: (creditSaleId: number) => `${env.API_URL}/credit-sale/get/${creditSaleId}`,
